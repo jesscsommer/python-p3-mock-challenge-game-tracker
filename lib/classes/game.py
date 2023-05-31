@@ -10,7 +10,7 @@ class Game:
         return [result for result in Result.all if result.game == self]
     
     def players(self, new_player=None):
-        return {result.player for result in self.results()}
+        return list({result.player for result in self.results()})
     
     def average_score(self, player):
         all_scores = [result.score for result in self.results() 

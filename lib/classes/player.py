@@ -12,7 +12,7 @@ class Player:
         return [result for result in Result.all if result.player == self]
     
     def games_played(self, new_game=None):
-        return {result.game for result in self.results()}
+        return list({result.game for result in self.results()})
     
     def played_game(self, game):
         return game in self.games_played()
