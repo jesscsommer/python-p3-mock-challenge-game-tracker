@@ -15,7 +15,7 @@ class Result:
     
     @score.setter
     def score(self, score):
-        if (type(score) == int
+        if (isinstance(score, int)
             and 1 <= score <= 5000):
             self._score = score
         else: 
@@ -27,7 +27,6 @@ class Result:
     
     @player.setter
     def player(self, player):
-        from classes.player import Player 
         if isinstance(player, Player):
             self._player = player
         else: 
@@ -39,8 +38,10 @@ class Result:
     
     @game.setter
     def game(self, game):
-        from classes.game import Game 
         if isinstance(game, Game):
             self._game = game
         else: 
             raise Exception("Game must be of instance Game")
+
+from classes.player import Player 
+from classes.game import Game 

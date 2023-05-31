@@ -1,5 +1,3 @@
-from classes.result import Result
-
 class Player:
 
     all = []
@@ -8,17 +6,17 @@ class Player:
         self.username = username
         type(self).all.append(self)
         
-    def results(self, new_result=None):
-        return [result for result in Result.all if result.player == self]
+    def results(self):
+        return [result for result in Result.all if result.player is self]
     
-    def games_played(self, new_game=None):
+    def games_played(self):
         return list({result.game for result in self.results()})
     
     def played_game(self, game):
         return game in self.games_played()
 
     def num_times_played(self, game):
-        all_plays = [result for result in self.results() if result.game == game]
+        all_plays = [result for result in self.results() if result.game is game]
         return len(all_plays)
     
     @classmethod
@@ -40,8 +38,10 @@ class Player:
     
     @username.setter
     def username(self, username):
-        if (type(username) == str 
+        if (isinstance(username, str)
             and 2 <= len(username) <= 16):
             self._username = username 
         else: 
             raise Exception("Username must be a string between 2 and 16 chars")
+
+from classes.result import Result
