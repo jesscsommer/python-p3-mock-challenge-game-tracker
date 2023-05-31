@@ -1,3 +1,5 @@
+from classes.result import Result
+
 class Game:
     def __init__(self, title):
         self.title = title
@@ -5,30 +7,26 @@ class Game:
         self._players = []
         
     def results(self, new_result=None):
-        from classes.result import Result
-        if new_result and isinstance(new_result, Result):
-            self._results.append(new_result)
-        return self._results
+        return [result for result in Result.all if result.game == self]
     
     def players(self, new_player=None):
-        from classes.player import Player
-        if new_player and isinstance(new_player, Player):
-            self._players.append(new_player)
-        return self._players
+        return {result.player for result in self.results()}
     
     def average_score(self, player):
-        scores = [r.score for r in self._results if r.player == player]
-        if scores: 
-            return sum(scores) / len(scores)
+        all_scores = [result.score for result in self.results() 
+                        if result.player == player]
+        if all_scores: return sum(all_scores) / len(all_scores)
 
     # Properties 
-    @property 
+    @property
     def title(self):
         return self._title
     
     @title.setter
     def title(self, title):
-        if type(title) == str and len(title):
-            self._title = title 
+        if (not hasattr(self, "title")
+            and type(title) == str
+            and len(title)):
+            self._title = title
         else: 
-            raise TypeError("Game title must be a string")
+            raise Exception("Title must be a string and cannot be changed")
