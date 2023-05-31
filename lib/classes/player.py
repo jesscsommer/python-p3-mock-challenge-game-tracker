@@ -31,7 +31,7 @@ class Player:
     def highest_scored(cls, game):
         high_score = 0
         best_player = None
-        for player in Player.all: 
+        for player in cls.all: 
             avg = game.average_score(player)
             if avg and avg > high_score: 
                 high_score = avg 
