@@ -12,6 +12,7 @@ class Game:
         all_scores = [result.score for result in self.results() 
                         if result.player is player]
         if all_scores: return sum(all_scores) / len(all_scores)
+        return 0
 
     # Properties 
     @property

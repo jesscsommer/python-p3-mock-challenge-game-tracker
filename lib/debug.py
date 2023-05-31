@@ -10,6 +10,7 @@ if __name__ == '__main__':
 
     g1 = Game("Scrabble")
     g2 = Game("Wingspan")
+    g3 = Game("Here to Slay")
 
     p1 = Player("jess_sayin")
     p2 = Player("awrox")

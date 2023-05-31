@@ -21,15 +21,10 @@ class Player:
     
     @classmethod
     def highest_scored(cls, game):
-        high_score = 0
-        best_player = None
-        for player in cls.all: 
-            avg = game.average_score(player)
-            if avg and avg > high_score: 
-                high_score = avg
-                best_player = player
-        return best_player
-        
+        if isinstance(game, Game) and game.results(): 
+            avgs = [(player, game.average_score(player)) for player in cls.all]
+            avgs.sort(key=lambda t: t[1], reverse = True)
+            return avgs[0][0]
 
     # Properties 
     @property
@@ -45,3 +40,4 @@ class Player:
             raise Exception("Username must be a string between 2 and 16 chars")
 
 from classes.result import Result
+from classes.game import Game
